@@ -10,4 +10,9 @@ class Course(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long? = null
+    val categoryName: String
+        get() {
+            val category = checkNotNull(subcategory.category) { "Esta já é uma categoria mãe" }
+            return category.name
+        }
 }

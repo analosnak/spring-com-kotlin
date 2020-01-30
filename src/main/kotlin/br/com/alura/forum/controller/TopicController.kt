@@ -1,5 +1,6 @@
 package br.com.alura.forum.controller
 
+import br.com.alura.forum.controller.dto.output.TopicBriefOutputDto
 import br.com.alura.forum.model.Category
 import br.com.alura.forum.model.Course
 import br.com.alura.forum.model.Topic
@@ -12,7 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody
 class TopicController {
     @ResponseBody
     @RequestMapping("/api/topics")
-    fun listTopics(): List<Topic> {
+    fun listTopics(): List<TopicBriefOutputDto> {
         val owner = User("Ana", "ana@caelum.com.br", "1234")
         val subcategory = Category("Java", Category("Programação"))
         val course = Course("Java e JSF", subcategory)
@@ -20,6 +21,8 @@ class TopicController {
             shortDescription = "Problemas com o JSF", content = "Erro ao fazer conversão da data",
             owner =  owner, course =  course
         )
-        return listOf(topic, topic, topic)
+        val topics = listOf(topic, topic, topic)
+        return topics.map { TopicBriefOutputDto(it) }
+
     }
 }
