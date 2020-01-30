@@ -5,14 +5,12 @@ import br.com.alura.forum.model.Category
 import br.com.alura.forum.model.Course
 import br.com.alura.forum.model.Topic
 import br.com.alura.forum.model.User
-import org.springframework.stereotype.Controller
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.ResponseBody
+import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.RestController
 
-@Controller
+@RestController
 class TopicController {
-    @ResponseBody
-    @RequestMapping("/api/topics")
+    @GetMapping("/api/topics")
     fun listTopics(): List<TopicBriefOutputDto> {
         val owner = User("Ana", "ana@caelum.com.br", "1234")
         val subcategory = Category("Java", Category("Programação"))
