@@ -12,9 +12,12 @@ class Answer(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long? = null
-
     val creationInstant = Instant.now()
-
     var isSolution = false
         private set
+
+    fun markAsSolution() {
+        isSolution = true
+        topic.markAsSolved()
+    }
 }

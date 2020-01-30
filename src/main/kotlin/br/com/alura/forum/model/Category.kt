@@ -3,7 +3,7 @@ package br.com.alura.forum.model
 import javax.persistence.*
 
 @Entity
-class Category(
+data class Category(
         val name: String,
         @ManyToOne val category: Category? = null
 ) {
