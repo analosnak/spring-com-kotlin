@@ -8,8 +8,5 @@ import org.springframework.web.bind.annotation.ResponseBody
 class HomeController {
     @RequestMapping("/")
     @ResponseBody
-    fun index(): String {
-        print("Log do servidor de que foi feita uma requisição para '/'.")
-        return "Bem vindo ao fórum da Alura"
-    }
+    fun index() = "Bem vindo ao fórum da Alura"
 }
