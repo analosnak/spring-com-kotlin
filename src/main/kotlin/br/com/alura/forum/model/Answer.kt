@@ -6,7 +6,7 @@ import javax.persistence.*
 
 @Entity
 class Answer(
-    @Lob @Type(type = "org.hibernate.type.TextType") val content: String,
+    @Column(columnDefinition = "text") val content: String,
     @ManyToOne val topic: Topic,
     @ManyToOne val owner: User
 ) {
