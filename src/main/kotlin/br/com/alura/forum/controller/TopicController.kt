@@ -9,5 +9,5 @@ import org.springframework.web.bind.annotation.RestController
 class TopicController(private val topicRepository: TopicRepository) {
     @GetMapping("/api/topics")
     fun listTopics(): List<TopicBriefOutputDto> =
-        topicRepository.list().map { TopicBriefOutputDto(it) }
+        topicRepository.findAll().map { TopicBriefOutputDto(it) }
 }
