@@ -9,7 +9,7 @@ import javax.persistence.GenerationType.IDENTITY
 @Entity
 class Topic(
         val shortDescription: String,
-        @Lob val content: String,
+        @Column(columnDefinition = "text") val content: String,
         @ManyToOne val owner: User,
         @ManyToOne val course: Course
 ) {
