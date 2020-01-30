@@ -32,15 +32,13 @@ class Topic(
             _answers += newReply
         }
 
-    fun markAsSolved() {
+    fun markAsSolved() =
         if (status == SOLVED || status == CLOSED) throw RuntimeException("A dúvida já está solucionada!")
         else status = SOLVED
-    }
 
-    fun close() {
+    fun close() =
         if (status == CLOSED) throw RuntimeException("Essa dúvida já está fechada!")
         else status = CLOSED
-    }
 
 }
 
