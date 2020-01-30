@@ -16,20 +16,21 @@ class Topic(
     @Id
     @GeneratedValue(strategy = IDENTITY)
     val id: Long? = null
-    val creationInstant = Instant.now()
-    val lastUpdate = Instant.now()
+    val creationInstant: Instant = Instant.now()
+    val lastUpdate: Instant = Instant.now()
     @Enumerated(STRING) var status = NOT_ANSWERED
     @OneToMany(mappedBy = "topic") private val _answers = mutableListOf<Answer>()
     val answers: List<Answer>
         get() = _answers
 
-    fun registerNewReply(newReply: Answer) {
-        if (status == CLOSED) { throw RuntimeException("Tópico fechado! Não é possível adicionar novas respostas") }
+    fun registerNewReply(newReply: Answer) =
+        if (status == CLOSED) {
+            throw RuntimeException("Tópico fechado! Não é possível adicionar novas respostas")
+        }
         else {
             if (owner == newReply.owner) status = NOT_SOLVED
             _answers += newReply
         }
-    }
 
     fun markAsSolved() {
         if (status == SOLVED || status == CLOSED) throw RuntimeException("A dúvida já está solucionada!")

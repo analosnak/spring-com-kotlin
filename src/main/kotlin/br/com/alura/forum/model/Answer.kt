@@ -12,7 +12,7 @@ class Answer(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long? = null
-    val creationInstant = Instant.now()
+    val creationInstant: Instant = Instant.now()
     var isSolution = false
         private set
 

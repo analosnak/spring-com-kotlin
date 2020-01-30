@@ -2,6 +2,7 @@ package br.com.alura.forum.model
 
 import javax.persistence.*
 
+@Table(name="`user`")
 @Entity
 class User(
         val name: String,
