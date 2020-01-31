@@ -23,11 +23,12 @@ dependencies {
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+	implementation("au.com.console:kotlin-jpa-specification-dsl:2.0.0-rc.1")
+	implementation("io.springfox:springfox-swagger2:2.9.2")
 	runtimeOnly("org.postgresql:postgresql")
 	testImplementation("org.springframework.boot:spring-boot-starter-test") {
 		exclude(group = "org.junit.vintage", module = "junit-vintage-engine")
 	}
-	implementation("au.com.console:kotlin-jpa-specification-dsl:2.0.0-rc.1")
 }
 
 tasks.withType<Test> {
