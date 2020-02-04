@@ -5,24 +5,30 @@ import br.com.alura.forum.model.TopicStatus
 import br.com.alura.forum.model.Course
 import org.springframework.data.jpa.domain.Specification
 
-import au.com.console.jpaspecificationdsl.*
 import br.com.alura.forum.model.Category
+import javax.persistence.criteria.Path
+import javax.persistence.criteria.Predicate
 
 class TopicSearchInputDto(private val status: TopicStatus?, private val categoryName: String?) {
-    fun toSpecification(): Specification<Topic>? = and(
-            hasStatus(),
-            hasCategoryName()
-    )
+    fun toSpecification() = Specification<Topic> { root, _, criteriaBuilder ->
+        val predicates = mutableListOf<Predicate>()
 
-    private fun hasStatus() = status?.let { Topic::status.equal(it) }
-
-    private fun hasCategoryName(): Specification<Topic>? = categoryName?.let { name ->
-        where {
-            equal(
-                it.get(Topic::course).get(Course::subcategory).get(Category::category).get(Category::name),
-                name
-            )
+        status?.let {
+            val path: Path<TopicStatus> = root[Topic::status.name]
+            predicates.add(criteriaBuilder.equal(path, it))
         }
+
+        categoryName?.let {
+            val categoryNamePath: Path<String> =  root
+                .get<Course>(Topic::course.name)
+                .get<Category>(Course::subcategory.name)
+                .get<Category>(Category::category.name)
+                .get<String>(Category::name.name)
+            predicates.add(criteriaBuilder.equal(categoryNamePath, it))
+        }
+
+        criteriaBuilder.and(*predicates.toTypedArray())
     }
+
 
 }
