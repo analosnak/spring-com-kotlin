@@ -12,7 +12,7 @@ class TopicBriefOutputDto(topic: Topic) {
     val ownerName: String = topic.owner.name
     val courseName: String = topic.course.name
     val subcategoryName: String = topic.course.subcategory.name
-    val categoryName: String = topic.course.categoryName
+    val categoryName: String? = topic.course.subcategory.category?.name
     val numberOfResponses: Int = topic.answers.size
     val solved: Boolean = SOLVED == topic.status
 }
